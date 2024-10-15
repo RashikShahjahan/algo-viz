@@ -1,6 +1,6 @@
 "use client"
-
 import { ChangeEvent,useState } from "react"
+import Insertion from "./insertion";
 
 export default function Page() {
   const [selected,setSelected] = useState("Bubble");
@@ -56,14 +56,35 @@ export default function Page() {
     }
   };
 
+  const Selection = async () => {
+    let arr = [...items]; 
+    for (let j = 0; j < arr.length; j++) {
+      let minidx =j;
+      setLeftSwap(arr[minidx]);
+      for (let i = j+1; i < arr.length; i++) {
+          if(arr[minidx]>arr[i]){
+              minidx = i;
+              console.log(minidx)
+          }
+      }
+      setRightSwap(arr[minidx]);
+      let temp = arr[j];
+      arr[j] = arr[minidx];
+      arr[minidx] = temp;
+      setItems([...arr]);
+      await delay(500);
+    }
+  }
 
   const onButtonCLick = async ()=>{
     if(selected === "Bubble"){
       Bubble();
     }
     else if(selected === "Selection"){
+      Selection();
     }
     else if(selected === "Insertion"){
+      Insertion(items,console.log);
     }
     else if(selected === "Merge"){
     }
@@ -94,3 +115,5 @@ export default function Page() {
       </div>
     )
   }
+
+
