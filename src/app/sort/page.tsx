@@ -3,6 +3,7 @@ import { ChangeEvent,useState } from "react"
 import Bubble from "./Bubble";
 import Selection from "./Selection";
 import Insertion from "./Insertion";
+import Merge from "./Merge";
 
 export default function Page() {
   const [selected,setSelected] = useState("Bubble");
@@ -23,6 +24,7 @@ export default function Page() {
         {selected==="Bubble"&&<Bubble/>}
         {selected==="Selection"&&<Selection/>}
         {selected==="Insertion"&&<Insertion/>}
+        {selected==="Merge"&&<Merge/>}
 
 
       </div>
