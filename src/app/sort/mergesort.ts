@@ -1,11 +1,17 @@
-export default async function mergesort(array:number[],callbackMerge:any,level:number){
+export default async function mergesort(array:number[],callbackMerge:any,callbackDivide:any,level:number){
     if (array.length <= 1){
         return array
     }
     const splitidx = Math.ceil(array.length/2);
-    level++;
-    const left =  await mergesort(array.slice(0,splitidx),callbackMerge,level);
-    const right = await mergesort(array.slice(splitidx),callbackMerge,level);
+
+    const l = array.slice(0, splitidx);
+    const r = array.slice(splitidx);
+  
+    await callbackDivide(l, r, level);
+
+
+    const left =  await mergesort(l,callbackMerge,callbackDivide,level+1);
+    const right = await mergesort(r,callbackMerge, callbackDivide,level+1);
     const merged = merge(left,right);
     await callbackMerge(merged,level)
     return merged
