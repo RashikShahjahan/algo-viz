@@ -2,7 +2,6 @@
 import { useState } from "react";
 import mergesort from "./mergesort";
 
-// Helper function to check and add unique entries to the state
 const addUniqueStep = (
   stepsArray: any[][],
   newStep: any[],
@@ -10,20 +9,16 @@ const addUniqueStep = (
 ): any[][] => {
   const newSteps = [...stepsArray];
   
-  // Ensure the level exists
   if (!newSteps[level]) {
     newSteps[level] = [];
   }
   
-  // Convert the new step to a string for comparison
   const newStepStr = JSON.stringify(newStep);
   
-  // Check if the new step already exists in the current level
   const isDuplicate = newSteps[level].some(
     (step) => JSON.stringify(step) === newStepStr
   );
   
-  // If it's not a duplicate, add the new step
   if (!isDuplicate) {
     newSteps[level].push(newStep);
   }
@@ -37,13 +32,11 @@ export default function Merge() {
   const delay = (ms: number | undefined) =>
     new Promise((resolve) => setTimeout(resolve, ms));
 
-  // Callback for merge steps
   const callbackMerge = async (merged: number[], level: number) => {
     await delay(500);
     setSteps((prevSteps) => addUniqueStep(prevSteps, merged, level));
   };
 
-  // Callback for divide steps
   const callbackDivide = async (left: number[], right: number[], level: number) => {
     await delay(500);
     setDivideSteps((prevSteps) =>

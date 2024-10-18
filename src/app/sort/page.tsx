@@ -4,6 +4,7 @@ import Bubble from "./Bubble";
 import Selection from "./Selection";
 import Insertion from "./Insertion";
 import Merge from "./Merge";
+import Quick from "./Quick";
 
 export default function Page() {
   const [selected,setSelected] = useState("Bubble");
@@ -25,6 +26,7 @@ export default function Page() {
         {selected==="Selection"&&<Selection/>}
         {selected==="Insertion"&&<Insertion/>}
         {selected==="Merge"&&<Merge/>}
+        {selected==="Quick"&&<Quick/>}
 
 
       </div>
